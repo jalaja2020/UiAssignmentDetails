@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+       
+        function myFunction(){
+            var userForm = document.createElement("FORM");
+            userForm.setAttribute("id", "userForm");
+            userForm.setAttribute("onsubmit","validateForm()");
+            document.getElementById("userDiv").appendChild(userForm);
+
+
+            var spanUserName = document.createElement("SPAN");
+            var  spanUserNameText = document.createTextNode("User Name  :");
+            spanUserName.appendChild(spanUserNameText);
+            document.getElementById("userForm").appendChild(spanUserName);
+
+            var textUserName = document.createElement("input");
+            textUserName .setAttribute("type", "text");
+            textUserName.setAttribute("id","userName");
+            textUserName.setAttribute("required","true");
+            document.getElementById("userForm").appendChild(textUserName );
+
+            var userNameBr = document.createElement("BR");
+            document.getElementById("userForm").appendChild(userNameBr);
+            var userMobileBr = document.createElement("BR");
+            document.getElementById("userForm").appendChild(userMobileBr);
+
+            var spanUserMobile = document.createElement("SPAN");
+            var  spanUserMobileText = document.createTextNode("User Mobile :");
+            spanUserMobile.appendChild(spanUserMobileText);
+            document.getElementById("userForm").appendChild(spanUserMobile);
+
+            
+            var textUserMobile = document.createElement("input");
+            textUserMobile .setAttribute("type", "text");
+            textUserMobile.setAttribute("id","userMobile");
+            textUserMobile.setAttribute("required","true");
+            document.getElementById("userForm").appendChild(textUserMobile );
+
+            var userMobileBr = document.createElement("BR");
+            document.getElementById("userForm").appendChild(userMobileBr);
+            var userMobileBr = document.createElement("BR");
+            document.getElementById("userForm").appendChild(userMobileBr);
+
+            var spanUserSapId = document.createElement("SPAN");
+            var  spanUserSapIdText = document.createTextNode("User SapId :");
+            spanUserSapId.appendChild(spanUserSapIdText);
+            document.getElementById("userForm").appendChild(spanUserSapId);
+
+            var textUserSapId = document.createElement("input");
+            textUserSapId .setAttribute("type", "text");
+            textUserSapId.setAttribute("id","userSapId");
+            textUserSapId.setAttribute("required","true");
+            document.getElementById("userForm").appendChild(textUserSapId );
+
+            var userEmailBr = document.createElement("BR");
+            document.getElementById("userForm").appendChild(userEmailBr);
+            var userEmailBr = document.createElement("BR");
+            document.getElementById("userForm").appendChild(userEmailBr);
+
+            var spanUserEmail = document.createElement("SPAN");
+            var  spanUserEmailText = document.createTextNode("User Email :");
+            spanUserEmail.appendChild(spanUserEmailText);
+            document.getElementById("userForm").appendChild(spanUserEmail);
+
+            var textUserEmail = document.createElement("input");
+            textUserEmail .setAttribute("type", "email");
+            textUserEmail.setAttribute("id","userEmail");
+            textUserEmail.setAttribute("autocomplete","on");
+            textUserEmail.setAttribute("required","true");
+           
+            document.getElementById("userForm").appendChild(textUserEmail );
+
+            var userSubmitBr = document.createElement("BR");
+            document.getElementById("userForm").appendChild(userSubmitBr);
+            var userSubmitBr = document.createElement("BR");
+            document.getElementById("userForm").appendChild(userSubmitBr);
+
+            var spanUserGender = document.createElement("SPAN");
+            var  spanUserGenderText = document.createTextNode("Gender :");
+            spanUserGender.appendChild(spanUserGenderText);
+            document.getElementById("userForm").appendChild(spanUserGender);
+
+            var MaleBox = document.createElement('input');
+            MaleBox.type = "radio";
+            MaleBox.id = "gender";
+            MaleBox.name="gender";
+            MaleBox.value="male";
+            var spanUserMale = document.createElement("SPAN");
+            var  spanUserMaleText = document.createTextNode("Male");
+            spanUserMale.appendChild(spanUserMaleText);
+           
+
+            document.getElementById("userForm").appendChild(MaleBox);
+            document.getElementById("userForm").appendChild(spanUserMale);
+
+            var FemaleBox = document.createElement('input');
+            FemaleBox.type = 'radio';
+            FemaleBox.id = "gender";
+            FemaleBox.name="gender";
+            FemaleBox.value="female";
+            var spanUserFemale = document.createElement("SPAN");
+            var  spanUserFemaleText = document.createTextNode("Female");
+            spanUserFemale.appendChild(spanUserFemaleText);
+            
+            
+            document.getElementById("userForm").appendChild(FemaleBox);
+            document.getElementById("userForm").appendChild(spanUserFemale);
+
+            var userBr = document.createElement("BR");
+            document.getElementById("userForm").appendChild(userBr);
+            document.getElementById("userForm").appendChild(userBr);
+
+            var textUsersubmit = document.createElement("input");
+            textUsersubmit.setAttribute("type", "button");
+            textUsersubmit.setAttribute("value", "Add");
+            textUsersubmit.setAttribute("id","addButton");
+            textUsersubmit.setAttribute("onclick","addDetails()");
+            document.getElementById("userForm").appendChild(textUsersubmit);
+            
+
+            var textUserDelete = document.createElement("input");
+            textUserDelete.setAttribute("type", "button");
+            textUserDelete.setAttribute("value", "delete");
+            textUserDelete.setAttribute("id","deleteButton");
+            textUserDelete.setAttribute("onclick","deleteDetails()");
+            document.getElementById("userForm").appendChild(textUserDelete);
+            var userBr = document.createElement("BR");
+            document.getElementById("userForm").appendChild(userBr);
+
+            var textUserupdate = document.createElement("input");
+            textUserupdate.setAttribute("type", "button");
+            textUserupdate.setAttribute("value", "update");
+            textUserupdate.setAttribute("id","updateButton");
+            textUserupdate.setAttribute("onclick","updateDetails()");
+            document.getElementById("userForm").appendChild(textUserupdate);
+
+            var textUserDisplayList = document.createElement("input");
+            textUserDisplayList.setAttribute("type", "button");
+            textUserDisplayList.setAttribute("value", "display");
+            textUserDisplayList.setAttribute("id","displayButton");
+            textUserDisplayList.setAttribute("onclick","displayDetails()");
+            document.getElementById("userForm").appendChild(textUserDisplayList);
+
+            var userBr = document.createElement("BR");
+            document.getElementById("userForm").appendChild(userBr);
+            document.getElementById("userForm").appendChild(userBr);
+
+            var spanUserformSubmit = document.createElement("SPAN");
+            var  spanUserformSubmitText = document.createTextNode("form submit");
+            spanUserformSubmit.appendChild(spanUserformSubmitText);
+
+            var textUserSubmit = document.createElement("input");
+            textUserSubmit.setAttribute("type", "submit");
+            textUserSubmit.setAttribute("value", "submit");
+            document.getElementById("userForm").appendChild(spanUserformSubmit);
+            document.getElementById("userForm").appendChild(textUserSubmit);
+           
+        }
+        function validateForm(){
+
+             var userName = document.getElementById("userName").value;
+             
+             var userMobile = document.getElementById("userMobile").value;
+             var userSapId = document.getElementById("userSapId").value;
+             var userEmail = document.getElementById("userEmail").value;
+             var gender = document.getElementById("gender").value;
+            
+            }
+          function addDetails(){
+             var userName = document.getElementById("userName").value;
+             var userMobile = document.getElementById("userMobile").value;
+             var userSapId = document.getElementById("userSapId").value;
+             var userEmail = document.getElementById("userEmail").value;
+             var gender = document.getElementById("gender").value;
+             
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("addDetails").innerHTML = this.responseText;
+                }
+             };
+            xhttp.open("POST", "http://localhost:3000/userManagement", true);
+             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+             xhttp.send("userName="+userName+"&userMobile="+ userMobile+"&userSapId="+userSapId+"&userEmail="+userEmail+"&gender="+gender);
+              
+           }
+           function deleteDetails(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("deleteDetails").innerHTML = this.responseText;
+                }
+             };
+                xhttp.open("GET", "http://localhost:3000/userManagement ",true)
+                xhttp.send();
+           }
+           function updateDetails(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("updateDetails").innerHTML = this.responseText;
+                }
+             };
+                xhttp.open("GET", "http://localhost:3000/userManagement ",true)
+                xhttp.send(); 
+           }
+           function displayDetails(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("displayDetails").innerHTML = this.responseText;
+                }
+             };
+                xhttp.open("GET", "http://localhost:3000/userManagement",true)
+                xhttp.send(); 
+           }
+       
+    </script>
+</head>
+<body>
+    <div id="userDiv" >
+        
+    </div>
+    <input type="button" onclick="myFunction()" value="userForm"/>
+    <div id="addDetails">
+       <span>Add Details</span> 
+    </div>
+    <div id="deleteDetails">
+        <span>delete Details</span>  
+    </div>
+    <div id="updateDetails">
+        <span>update Details</span>  
+    </div>
+    <div id="displayDetails">
+        <span>display Details</span>  
+    </div>   
+</body>
+</html>

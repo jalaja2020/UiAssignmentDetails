@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="demo">
+<h2>The XMLHttpRequest Object</h2>
+<button type="button" onclick="loadDoc()">Change Content</button>
+</div>
+
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML = this.responseText;
+      var jsonObj = JSON.parse(this.responseText);
+      document.getElementById("id").innerHTML=jsonObj.id;
+      document.getElementById("body").innerHTML=jsonObj.body;
+      document.getElementById("postId").innerHTML=jsonObj.postId;
+    }
+  };
+  xhttp.open("GET", "http://localhost:3000/comments/1 ",true)
+  xhttp.send();
+}
+</script>
+ <table class = "src">
+         <tr><th>Name</th><th>Country</th></tr>
+         <tr><td><div id = "id">Sachin</div></td>
+         <td><div id = "body">India</div></td>
+         <td><div id="postId">postid</div></td>
+        </tr>
+
+</table>
+</body>
+</html>
