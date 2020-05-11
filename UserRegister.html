@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add user</title>
+<script>
+    function updateDetailsJson(){
+    var userName = document.getElementById("userName").value; 
+    var userMobile = document.getElementById("userMobile").value;
+    var sapId = document.getElementById("sapId").value;
+    var gender = document.getElementById("gender").value;
+    var idValue = document.getElementById("idValue").value;
+   alert(document.getElementById("idValue").value);
+   var obj = {userName : userName, userMobile : userMobile , sapId : sapId , gender:gender };
+    console.log(obj);
+
+    var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    alert("user data updated successfully");
+                    console.log (this.responseText);
+                    getData();
+                }
+             };
+             xhttp.open("PUT", "http://localhost:3000/userManagement/"+idValue, true);
+
+             xhttp.setRequestHeader('Content-type','application/json');
+
+             xhttp.send(JSON.stringify(obj));
+    }
+  function myFunction(){
+    var userName = document.getElementById("userName").value; 
+    var userMobile = document.getElementById("userMobile").value;
+    var sapId = document.getElementById("sapId").value;
+    var gender = document.getElementById("gender").value;
+   
+    if(userName=="" || userName==null){
+    	alert("Please Enter User Name");
+    	return false;
+    }
+    else if(userMobile ==null || userMobile ==""){
+    	alert("Please Enter mobile");
+    	return false;
+    }
+    else if(sapId ==null || sapId ==""){
+    	alert("Please Enter Sap Id ");
+    	return false;
+    }
+
+    var obj = {userName : userName, userMobile : userMobile , sapId : sapId , gender:gender };
+    console.log(obj);
+
+    var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    alert("data inserted successfuly");
+                    document.getElementById("addDetails").innerHTML = this.responseText;
+                }
+             };
+            xhttp.open("POST", "http://localhost:3000/userManagement", true);
+            xhttp.setRequestHeader("Content-type","application/json");
+            xhttp.send(JSON.stringify(obj));
+  }
+  
+  
+function getData() {
+	var tableEl = document.getElementsByTagName('table');
+    if (tableEl[0] !== undefined) {
+        tableEl[0].remove()
+    }
+	
+    var httpReq;
+    if(window.XMLHttpRequest) {
+        httpReq = new XMLHttpRequest();
+    }
+    else{
+        httpReq = new ActiveXObject("")
+    }
+    httpReq.onreadystatechange = function() {
+
+        if(this.readyState ===4 && this.status === 200){
+            console.log(this.response);
+            tablecreate(this.response);
+        }
+    }
+    httpReq.open('get', 'http://localhost:3000/userManagement', true);
+    httpReq.send();
+}
+function tablecreate(response){
+	debugger;
+	
+	var body = document.getElementsByTagName('body')[0];
+	var table = document.createElement('table');
+	table.setAttribute("border", "1");
+	
+	
+    var tbody = document.createElement('tbody');
+    var thead = document.createElement('thead');
+    var headTr = document.createElement('tr');
+    
+    var headTd1 = document.createElement('td');
+    var headTd1text = document.createTextNode ("Id");
+    headTd1.appendChild(headTd1text);
+    
+    var headTd2 = document.createElement('td');
+    var headTd2text = document.createTextNode ("userName");
+    headTd2.appendChild(headTd2text);
+    
+    var headTd3 = document.createElement('td');
+    var headTd3text = document.createTextNode("userMobile");
+    headTd3.appendChild(headTd3text);
+
+    var headTd4 = document.createElement('td');
+    var headTd4text = document.createTextNode("sapId");
+    headTd4.appendChild(headTd4text);
+
+    var headTd5 = document.createElement('td');
+    var headTd5text = document.createTextNode("gender");
+    headTd5.appendChild(headTd5text);
+
+    var headTd6 = document.createElement('td');
+    var headTd6text = document.createTextNode ("delete");
+    headTd6.appendChild(headTd6text);
+    
+    var headTd7 = document.createElement('td');
+    var headTd7text = document.createTextNode ("add");
+    headTd7.appendChild(headTd7text);
+
+    headTr.appendChild(headTd1);
+    headTr.appendChild(headTd2);
+    headTr.appendChild(headTd3);
+    headTr.appendChild(headTd4);
+    headTr.appendChild(headTd5);
+    headTr.appendChild(headTd6);
+    headTr.appendChild(headTd7);
+
+    
+    thead.appendChild(headTr);
+    var data = JSON.parse(response);
+    var len = data.length;
+    
+    if(len > 0 ){
+    for(var i=0; i<len;i++){
+        var tbodyTr = document.createElement('tr');
+
+        var td1 = document.createElement('td');
+        var td1Text = document.createTextNode(data[i].id);
+        td1.appendChild(td1Text);
+
+        var td2 = document.createElement('td');
+        var td2Text = document.createTextNode(data[i].userName);
+        td2.appendChild(td2Text);
+
+        var td3 = document.createElement('td');
+        var td3Text = document.createTextNode(data[i].userMobile);
+        td3.appendChild(td3Text);
+
+        var td4 = document.createElement('td');
+        var td4Text = document.createTextNode(data[i].sapId);
+        td4.appendChild(td4Text);
+
+        var td5 = document.createElement('td');
+        var td5Text = document.createTextNode(data[i].gender);
+        td5.appendChild(td5Text);
+
+        //delete
+        var td6=document.createElement('td');
+        var delbutton=document.createElement('button');
+        delbutton.addEventListener("click",function(){
+        	var data=this.parentElement.parentElement.cells;
+        	var xmlhttp;
+        	if(window.XMLHttpRequest){
+        	xmlhttp=new XMLHttpRequest();
+        	}
+        	xmlhttp.onreadystatechange= function(){
+        		if(this.status === 200 && this.readyState===4){
+        			alert("Deleted Successfully");
+        			getData();
+        			
+        		}
+        	}
+        	xmlhttp.open("DELETE", "http://localhost:3000/userManagement/"+data[0].innerHTML, true);
+        	xmlhttp.setRequestHeader('Content-type','application/json');
+        	xmlhttp.send(null);
+        })
+        var delbuttontxt=document.createTextNode("delete");
+        delbutton.appendChild(delbuttontxt);
+        td6.appendChild(delbutton);
+        
+        //Update
+        var td7=document.createElement('td');
+        var updatebutton=document.createElement('button');
+        var updatebuttontxt=document.createTextNode("Update");
+        updatebutton.addEventListener("click",function(){
+            var data=this.parentElement.parentElement.cells;
+           
+        	console.log("data: "+data[0].innerHTML+" "+data[1].innerHTML+"  "+data[2].innerHTML+" "+data[3].innerHTML+" "+data[4].innerHTML);
+        	var obj={id:data[0].innerHTML ,userName:data[1].innerHTML ,userMobile: data[2].innerHTML ,sapId:data[3].innerHTML ,gender:data[4].innerHTML};
+        	console.log("usermanagement: "+ obj);
+            document.getElementById("userName").value = data[1].innerHTML;
+            document.getElementById("userMobile").value = data[2].innerHTML;
+            document.getElementById("sapId").value = data[3].innerHTML;
+            document.getElementById("gender").value = data[4].innerHTML;
+            document.getElementById("idValue").value=data[0].innerHTML;
+
+        	
+        })
+        
+        updatebutton.appendChild(updatebuttontxt);
+        td7.appendChild(updatebutton);
+        tbodyTr.appendChild(td1);
+        tbodyTr.appendChild(td2);
+        tbodyTr.appendChild(td3);
+        tbodyTr.appendChild(td4);
+        tbodyTr.appendChild(td5);
+        tbodyTr.appendChild(td6);
+        tbodyTr.appendChild(td7);
+        tbody.appendChild(tbodyTr); 
+    }
+    }
+    else{
+        var data = document.createElement("h4");
+        var noData = document.createTextNode("No data Found")
+        data.appendChild(noData);
+        tbody.appendChild(data);
+    }
+    
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    
+    body.appendChild(table);
+	
+}
+</script>
+</head>
+<body onload="getData()">
+<h2>Add User Information</h2>
+
+    User Name: 
+    <input type="text" name="userName" id="userName" pattern="[A-Za-z0-9]+" maxlength="10" 
+     placeholder="Enter Name" required /></br>
+     User mobile
+     <input type="number" name="userMobile" id="userMobile" pattern="[0-9]+" placeholder="Enter mobile" required/></br>
+	Sap Id:  <input type="number" name="sapId" id="sapId" pattern="[0-9]+" placeholder="Enter SapId" required/></br>
+    gender:
+    <input type="radio" id="gender" name="gender" value="Male"><span>Male</span>
+    <input type="radio" id="gender" name="gender" value="Female"><span>Female</span></br>
+
+    <button id="add" onclick="myFunction()" >Add </button>
+
+    <input type="button" id="updateDetails" onclick="updateDetailsJson()" value="update" />
+    <input type="hidden" id="idValue" name="idValue" />
+	<hr>
+	
+	
+	
+</body>
+</html>
